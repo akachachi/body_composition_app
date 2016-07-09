@@ -17,7 +17,7 @@
       <tr>
         <td class="mdl-data-table__cell--non-numeric"><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.created_at %></td>
+        <td><%= user.register_date %></td>
       </tr>
   <% end %>
   </tbody>
@@ -45,7 +45,7 @@
         <td><%= user.name %></td>
         <td><%= user.password %></td>
         <td><%= user.email %></td>
-        <td><%= user.created_at %></td>
+        <td><%= user.register_date %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

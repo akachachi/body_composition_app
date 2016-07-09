@@ -1,3 +1,5 @@
+require 'date'
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -29,6 +31,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     #登録日をパラメータに追加
+    @user[:register_date] = Date.today
     puts "========"
     puts user_params
     puts "========"

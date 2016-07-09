@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :fats
+  resources :weights
   resources :users
 
   get 'home' => 'users#index'
