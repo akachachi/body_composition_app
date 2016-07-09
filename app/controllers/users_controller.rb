@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.all.reverse_order!
   end
 
   # GET /users/1
@@ -12,7 +12,6 @@ class UsersController < ApplicationController
   def show #mypageにする
     #loginユーザでないとそのページを見れないようにする
     if session[:user_id] != params[:id].to_i
-      puts "fldjaflkjadsl;jf;kj"
     end
   end
 
@@ -29,6 +28,11 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    #登録日をパラメータに追加
+    puts "========"
+    puts user_params
+    puts "========"
+    #ここでパスワードの検証をするか，ｊｓでやるか
 
     respond_to do |format|
       if @user.save
@@ -74,6 +78,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password, :email, :created_at)
+      params.require(:user).permit(:name, :password, :password_confirmation, :email, :created_at)
     end
 end

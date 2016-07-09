@@ -4,16 +4,26 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_for(:session, url: login_path) do |f| %>
+      <br>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+      <div class="mdl-textfield mdl-js-textfield">
+        <%= f.label :email , class: "mdl-textfield__label" %>
+        <%= f.email_field :email, class: "mdl-textfield__input" %>
+      </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <br>
 
-      <%= f.submit "Log in", class: "btn btn-primary" %>
+      <div class="mdl-textfield mdl-js-textfield">
+        <%= f.label :password , class: "mdl-textfield__label" %>      
+        <%= f.password_field :password, class: "mdl-textfield__input" %>
+      </div>
+ 
+       <br>
+
+      <%= f.submit "Log in", class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
     <% end %>
 
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    <br>
+    <p><%= link_to "Sign up", signup_path %></p>
   </div>
 </div>
