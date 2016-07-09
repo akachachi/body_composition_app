@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Fats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Value</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fats.each do |fat| %>
+      <tr>
+        <td><%= fat.user_id %></td>
+        <td><%= fat.value %></td>
+        <td><%= fat.date %></td>
+        <td><%= link_to 'Show', fat %></td>
+        <td><%= link_to 'Edit', edit_fat_path(fat) %></td>
+        <td><%= link_to 'Destroy', fat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fat', new_fat_path %>

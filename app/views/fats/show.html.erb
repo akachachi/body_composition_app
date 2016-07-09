@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @fat.user_id %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @fat.value %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @fat.date %>
+</p>
+
+<%= link_to 'Edit', edit_fat_path(@fat) %> |
+<%= link_to 'Back', fats_path %>
