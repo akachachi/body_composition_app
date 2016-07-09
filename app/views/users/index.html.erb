@@ -2,6 +2,32 @@
 
 <h1>Listing Users</h1>
 
+
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp"　align="center">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
+      <th>email</th>
+      <th>joined at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric"><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.created_at %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+
+<br>
+
+
 <table>
   <thead>
     <tr>
@@ -27,7 +53,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>

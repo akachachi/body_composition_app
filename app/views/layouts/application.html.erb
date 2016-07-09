@@ -4,6 +4,7 @@
   <title>BodyComponent</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -12,15 +13,35 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">BodyComponent</span>
+      <span class="mdl-layout-title">
+            <%= link_to home_path, :class => 'mdl-navigation__link' do %>
+            BodyComponent
+            <% end %>
+      </span>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
+          <% if logged_in? %>
+            <%#= link_to sanitize('<i class="material-icons">account_circle</i>'), user_path(current_user), :class => 'mdl-navigation__link'%>
+            <%= link_to user_path(current_user), :class => 'mdl-navigation__link' do %>
+              <i class="material-icons">account_circle</i> <%= current_user.name %>
+            <% end %>
+            <%= link_to 'login', :class => 'mdl-navigation__link' do %>
+              <i class="material-icons">settings</i> Settings
+            <% end %>
+            <%= link_to logout_path, method: :delete, :class => "mdl-navigation__link" do %>
+              <i class="material-icons">exit_to_app</i> Logout
+            <% end %>
+          <% else %>
+            <%= link_to signup_path, :class => 'mdl-navigation__link' do %>
+              <i class="material-icons">person_add</i> Sign up
+            <% end %>
+            <%= link_to login_path, :class => 'mdl-navigation__link' do %>
+              <i class="material-icons">input</i> Login
+            <% end %>
+          <% end %>
+
       </nav>
     </div>
   </header>
