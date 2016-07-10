@@ -15,6 +15,18 @@ class UsersController < ApplicationController
     #loginユーザでないとそのページを見れないようにする
     if session[:user_id] != params[:id].to_i
     end
+
+    @weight_data = {}
+    weight_data = Value.find_by_sql('select "date", "weight" from "values" where "user_id" = ' + params[:id])
+    for data in weight_data do
+      @weight_data[data[:date]] = data[:weight]
+    end
+    
+    @fat_data = {}
+    fat_data = Value.find_by_sql('select "date", "fat" from "values" where "user_id" = ' + params[:id])
+    for data in fat_data do
+      @fat_data[data[:date]] = data[:fat]
+    end
   end
 
   # GET /users/new
@@ -30,15 +42,21 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    #登録日をパラメータに追加
     @user[:register_date] = Date.today
-    puts "========"
-    puts user_params
-    puts "========"
-    #ここでパスワードの検証をするか，ｊｓでやるか
 
+    #ここでパスワードの検証
+    #Name or Emailがすでに登録されているものがあればエラー
     respond_to do |format|
-      if @user.save
+      if user_params[:password] != user_params[:password_confirmation]
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }        
+      elsif User.where(name: user_params[:name]).count != 0
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      elsif User.where(email: user_params[:email]).count != 0
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      elsif @user.save
         log_in @user
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
@@ -53,6 +71,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
+      puts user_params
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }

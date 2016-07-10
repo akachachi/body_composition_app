@@ -4,7 +4,9 @@
   <title>BodyComponent</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -24,6 +26,10 @@
       <nav class="mdl-navigation mdl-layout--large-screen-only">
           <% if logged_in? %>
             <%#= link_to sanitize('<i class="material-icons">account_circle</i>'), user_path(current_user), :class => 'mdl-navigation__link'%>
+            <%= link_to new_value_path, :class => "mdl-navigation__link" do %>
+              <i class="material-icons">create</i>Recode
+            <% end %>
+
             <%= link_to user_path(current_user), :class => 'mdl-navigation__link' do %>
               <i class="material-icons">account_circle</i> <%= current_user.name %>
             <% end %>
@@ -46,7 +52,7 @@
     </div>
   </header>
   <main class="mdl-layout__content">
-    <div class="page-content" align="center">
+    <div class="page-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col" align="center">
       <%= yield %>
     </div>
   </main>

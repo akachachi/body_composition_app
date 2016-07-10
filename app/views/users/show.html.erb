@@ -1,20 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<h3>まるまるさんの体組成</h3>
+	
+    <div class="mdl-button--primary">
+      体重
+    </div>
+    <%= line_chart @weight_data %>
 
-<p>
-  <strong>Password:</strong>
-  <%= @user.password %>
-</p>
+    <div class="mdl-button--accent">
+      体脂肪率
+    </div>
+    <%= line_chart @fat_data %>
+<!-- 
+	<% if session[:user_id] == params[:id].to_i %>
+		<h3>データ入力</h3>
+	    <%= link_to new_value_path, :class => "mdl-button mdl-js-button mdl-button--raised" do %>
+	      <i class="material-icons">create</i>入力
+	    <% end %>
+    <% end %> -->
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<!-- 
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+	<%= link_to new_value_path, :class => "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" do %>
+      <i class="material-icons">date_range</i>日
+    <% end %>
+    <%= link_to new_value_path, :class => "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" do %>
+      <i class="material-icons">date_range</i>週
+    <% end %>
+    <%= link_to new_value_path, :class => "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" do %>
+      <i class="material-icons">date_range</i>月
+    <% end %>
+ -->

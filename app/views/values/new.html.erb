@@ -1,0 +1,38 @@
+<h1>Data Input</h1>
+
+<%= form_for(@value) do |f| %>
+  <% if @value.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@value.errors.count, "error") %> prohibited this value from being saved:</h2>
+
+      <ul>
+      <% @value.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mdl-textfield mdl-js-textfield">
+    <%= f.label :weight , class: "mdl-textfield__label" %>
+    <%= f.text_field :weight, class: "mdl-textfield__input" %>
+  </div>
+  <br>
+
+  <div class="mdl-textfield mdl-js-textfield">
+    <%= f.label :fat , class: "mdl-textfield__label" %>
+    <%= f.text_field :fat, class: "mdl-textfield__input" %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= f.label :date %>
+    <%= f.date_select :date %>
+  </div>
+
+  <div class="actions" >
+    <%= f.submit "記録", class: "mdl-button mdl-js-button mdl-button--raised mdl-button--accent" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', values_path %>

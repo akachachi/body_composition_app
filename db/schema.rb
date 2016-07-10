@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160709070511) do
+ActiveRecord::Schema.define(version: 20160709081110) do
 
   create_table "fats", force: :cascade do |t|
     t.integer  "user_id"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20160709070511) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.date     "register_date"
+  end
+
+  create_table "values", force: :cascade do |t|
+    t.integer  "user_id"
+    t.float    "weight"
+    t.float    "fat"
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "weights", force: :cascade do |t|

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @value.user_id %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @value.weight %>
+</p>
+
+<p>
+  <strong>Fat:</strong>
+  <%= @value.fat %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @value.date %>
+</p>
+
+<%= link_to 'Edit', edit_value_path(@value) %> |
+<%= link_to 'Back', values_path %>

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :fats
-  resources :weights
+  resources :values ,:only => [:create, :new]
+  #resources :fats
+  #resources :weights
   resources :users
 
   get 'home' => 'users#index'
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+
+  delete 'deleteuser' => 'users#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

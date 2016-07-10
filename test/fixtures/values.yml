@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  weight: 1.5
+  fat: 1.5
+  date: 2016-07-09
+
+two:
+  user_id: 1
+  weight: 1.5
+  fat: 1.5
+  date: 2016-07-09
