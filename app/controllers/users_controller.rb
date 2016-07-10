@@ -2,7 +2,6 @@ require 'date'
 
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   # GET /users
   # GET /users.json
   def index
@@ -11,11 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show #mypageにする
-    #loginユーザでないとそのページを見れないようにする
-    if session[:user_id] != params[:id].to_i
-    end
-
+  def show
     @weight_data = {}
     weight_data = Value.find_by_sql('select "date", "weight" from "values" where "user_id" = ' + params[:id])
     for data in weight_data do
@@ -26,6 +21,17 @@ class UsersController < ApplicationController
     fat_data = Value.find_by_sql('select "date", "fat" from "values" where "user_id" = ' + params[:id])
     for data in fat_data do
       @fat_data[data[:date]] = data[:fat]
+    end
+
+    render 'show'
+  end
+
+  def search
+    user = User.where(name: params[:name])
+    for u in user
+      puts u.id
+      params[:id] = u.id.to_s
+      self.show
     end
   end
 
@@ -71,7 +77,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      puts user_params
+      puts params
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
@@ -100,6 +106,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :password, :password_confirmation, :email, :created_at)
+      params.require(:user).permit(:name, :password, :password_confirmation, :email, :created_at, :new_password, :new_password_confirmation)
     end
 end
