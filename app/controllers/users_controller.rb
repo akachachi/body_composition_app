@@ -11,16 +11,85 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+
+    @username = ""
+    users = User.where(id: params[:id])
+    for user in users
+      @username = user[:name]
+    end
+
     @weight_data = {}
     weight_data = Value.find_by_sql('select "date", "weight" from "values" where "user_id" = ' + params[:id])
     for data in weight_data do
       @weight_data[data[:date]] = data[:weight]
     end
+
+    #今月の平均
+    tm = 0
+    sum = 0
+    for data in weight_data do
+      if data[:date].month == Date.today.month and data[:weight]
+        sum += data[:weight]
+        tm += 1
+      end
+    end
+    if tm != 0
+      @this_month_weight = sum / tm
+    else
+      @this_month_weight = 0
+    end
+
+    #先月の平均
+    tm = 0
+    sum = 0
+    for data in weight_data do
+      if data[:date].month == Date.today.month-1 and data[:weight]
+        sum += data[:weight]
+        tm += 1
+      end
+    end
+    if tm != 0
+      @last_month_weight = sum / tm
+    else
+      @last_month_weight = 0
+    end
+
+
     
     @fat_data = {}
     fat_data = Value.find_by_sql('select "date", "fat" from "values" where "user_id" = ' + params[:id])
     for data in fat_data do
       @fat_data[data[:date]] = data[:fat]
+    end
+
+    #今月の平均
+    tm = 0
+    sum = 0
+    for data in fat_data do
+      if data[:date].month == Date.today.month and data[:fat]
+        sum += data[:fat]
+        tm += 1
+      end
+    end
+    if tm != 0
+      @this_month_fat = sum / tm
+    else
+      @this_month_fat = 0
+    end
+
+    #先月の平均
+    tm = 0
+    sum = 0
+    for data in fat_data do
+      if data[:date].month == Date.today.month-1 and data[:fat]
+        sum += data[:fat]
+        tm += 1
+      end
+    end
+    if tm != 0
+      @last_month_fat = sum / tm
+    else
+      @last_month_fat = 0
     end
 
     render 'show'
@@ -52,26 +121,25 @@ class UsersController < ApplicationController
 
     #ここでパスワードの検証
     #Name or Emailがすでに登録されているものがあればエラー
-    respond_to do |format|
-      if user_params[:password] != user_params[:password_confirmation]
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }        
-      elsif User.where(name: user_params[:name]).count != 0
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      elsif User.where(email: user_params[:email]).count != 0
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      elsif @user.save
-        log_in @user
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if user_params[:password] != user_params[:password_confirmation]
+      flash.now[:danger] = 'パスワードがwww一致していませんwwwww'
+      render 'new'
+    elsif User.where(name: user_params[:name]).count != 0
+      flash.now[:danger] = 'その名前はすでに使われていマウス'
+      render 'new'
+    elsif User.where(email: user_params[:email]).count != 0
+      flash.now[:danger] = 'そのメールアドレスはすでに使われていマウス'
+      render 'new'
+    elsif @user.save
+      log_in @user
+      redirect_to @user, notice: 'User was successfully created.'
+    else
+      flash.now[:danger] = 'なぞのエラー'
+      render 'new'
     end
   end
+
+
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json

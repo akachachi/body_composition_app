@@ -1,16 +1,24 @@
-<p id="notice"><%= notice %></p>
+<div id="notice">
+  <%= notice %>
+</div>
 
-<h3>まるまるさんの体組成　　　　　　　　　　　　</h3>
+<h3><%= @username %>さんの体組成　　　　　　　　　　　　　　　　</h3>
 	
     <div class="mdl-button--primary">
       体重
+    </div>
+    <div class="mdl-button--primary">
+      今月の平均: <%= @this_month_weight.round(2) %>kg　　先月の平均: <%= @last_month_weight.round(2) %>
     </div>
     <%= line_chart @weight_data %>
 
     <div class="mdl-button--accent">
       体脂肪率
     </div>
-    <%= line_chart @fat_data %>
+    <div class="mdl-button--accent">
+      今月の平均: <%= @this_month_fat.round(2) %> 　　先月の平均: <%= @last_month_fat.round(2) %>
+    </div>
+    <%= line_chart @fat_data, colors: ["pink"] %>
 <!-- 
 	<% if session[:user_id] == params[:id].to_i %>
 		<h3>データ入力</h3>

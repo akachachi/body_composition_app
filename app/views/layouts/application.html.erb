@@ -27,7 +27,7 @@
           <% if logged_in? %>
             <%#= link_to sanitize('<i class="material-icons">account_circle</i>'), user_path(current_user), :class => 'mdl-navigation__link'%>
             <%= link_to new_value_path, :class => "mdl-navigation__link" do %>
-              <i class="material-icons">create</i>Recode
+              <i class="material-icons">create</i>Input
             <% end %>
 
             <%= link_to user_path(current_user), :class => 'mdl-navigation__link' do %>

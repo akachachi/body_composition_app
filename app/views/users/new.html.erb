@@ -13,6 +13,11 @@
     </div>
   <% end %>
 
+<div style="color:#FE2E2E">
+  <%= flash[:danger] %>
+</div>
+
+
   <div class="mdl-textfield mdl-js-textfield">
     <%= f.label :name , class: "mdl-textfield__label" %>
     <%= f.text_field :name, class: "mdl-textfield__input" %>
@@ -38,7 +43,7 @@
 
 
   <div class="actions" >
-    <%= f.submit "Sign in", class: "mdl-button mdl-js-button mdl-button--raised mdl-button--accent" %>
+    <%= f.submit "Sign in", class: "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" %>
   </div>
 <% end %>
 
