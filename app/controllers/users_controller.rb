@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all.reverse_order!
+    render 'index'
   end
 
   # GET /users/1
@@ -97,6 +98,12 @@ class UsersController < ApplicationController
 
   def search
     user = User.where(name: params[:name])
+
+    if user.count == 0
+      flash.now[:danger] = "その名前のユーザは存在しません．"
+      self.index
+    end
+
     for u in user
       puts u.id
       params[:id] = u.id.to_s
