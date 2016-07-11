@@ -8,7 +8,7 @@
       体重
     </div>
     <div class="mdl-button--primary">
-      今月の平均: <%= @this_month_weight.round(2) %>kg　　先月の平均: <%= @last_month_weight.round(2) %>
+      今月の平均: <%= @this_month_weight.round(2) %>kg　　先月の平均: <%= @last_month_weight.round(2) %>kg
     </div>
     <%= line_chart @weight_data %>
 
@@ -16,27 +16,6 @@
       体脂肪率
     </div>
     <div class="mdl-button--accent">
-      今月の平均: <%= @this_month_fat.round(2) %> 　　先月の平均: <%= @last_month_fat.round(2) %>
+      今月の平均: <%= @this_month_fat.round(2) %>％ 　　先月の平均: <%= @last_month_fat.round(2) %>％
     </div>
     <%= line_chart @fat_data, colors: ["pink"] %>
-<!-- 
-	<% if session[:user_id] == params[:id].to_i %>
-		<h3>データ入力</h3>
-	    <%= link_to new_value_path, :class => "mdl-button mdl-js-button mdl-button--raised" do %>
-	      <i class="material-icons">create</i>入力
-	    <% end %>
-    <% end %> -->
-
-<!-- 
-
-
-	<%= link_to new_value_path, :class => "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" do %>
-      <i class="material-icons">date_range</i>日
-    <% end %>
-    <%= link_to new_value_path, :class => "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" do %>
-      <i class="material-icons">date_range</i>週
-    <% end %>
-    <%= link_to new_value_path, :class => "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" do %>
-      <i class="material-icons">date_range</i>月
-    <% end %>
- -->
